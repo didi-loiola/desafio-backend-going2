@@ -1,0 +1,19 @@
+{
+  "name": "encurtador-url",
+  "version": "1.0.0",
+  "description": "Desafio proposto por Going2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./",
+    "dev": "nodemon ./"
+  },
+  "keywords": [
+    "node",
+    "url"
+  ],
+  "author": "Diego Loiola",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
