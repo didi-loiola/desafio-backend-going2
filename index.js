@@ -4,6 +4,14 @@ var indexRouter = require('./src/routes/indexRouter');
 
 const app = express();
 
+//Conexão com Banco de Dados
+(async() =>{
+    const database = require('./src/db');
+    const Link = require('./src/models/link');
+  
+  await database.sync();
+})()
+
 //Configurações da Aplicação
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
