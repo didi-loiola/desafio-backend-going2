@@ -15,6 +15,6 @@ router.get('/', function (req,res,next) {
 router.post('/encode', indexController.postEncode);
 
 //Desencurtar a URL
-router.post('/decode', indexController.postDecode);
+router.get('/decode', indexController.getDecode);
 
 module.exports = router;
