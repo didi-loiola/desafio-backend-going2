@@ -12,9 +12,12 @@ exports.postEncode = async (req, res, next) => {
           return text;
         }
         const url = req.body.url;
-        const code = generateCode();
         
-        if(url == "") res.status(400).send({error: "URL vazia"})
+        if(url == "") {
+          return res.status(400).send({error: "URL vazia"});
+        }
+
+        const code = generateCode();
         const resultado = await Link.create({
           url,
           code
