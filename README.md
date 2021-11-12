@@ -95,3 +95,19 @@ Endpoints
     GET /redirect/:code
     
     Esse endpoint vai redirecionar para a url original
+
+## Observaçãoes
+
+Você vai precisar criar um arquivo .env, abaixo está o modelo de como o arquivo deve ser
+
+    DB_DATABASE=string_qualquer
+    DB_USER=string_qualquer
+    DB_PASSWORD=string_qualquer
+    DB_HOST=string_qualquer
+    DB_PORT=string_qualquer
+    DIALECT=string_qualquer 
+
+Essa variavél DIALECT ele deve possuir o seguintes valores.
+
+    - mysql
+    - postgres
