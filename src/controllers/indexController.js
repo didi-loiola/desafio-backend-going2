@@ -5,7 +5,7 @@ const ShortLink = require('./../models/short-link')
 
 require('dotenv').config();
 
-exports.postEncode = async(req, res, next) => {
+exports.encode = async(req, res, next) => {
     try {
         const { url } = req.body;
         if (url) {
@@ -27,7 +27,7 @@ exports.postEncode = async(req, res, next) => {
     }
 }
 
-exports.getDecode = async(req, res, next) => {
+exports.decode = async(req, res, next) => {
     try {
         const url = req.body.url;
         const code = url.substring(22, 27);

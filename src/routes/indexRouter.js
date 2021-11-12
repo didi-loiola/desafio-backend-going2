@@ -5,16 +5,16 @@ require('dotenv').config();
 let indexController = require('../controllers/indexController');
 
 //Endpoint que mostra que está executando
-router.get('/', function (req,res,next) {
+router.get('/', function(req, res, next) {
     const init = 'Está funcionando';
 
     res.status(200).send(init);
 })
 
 //Encurtar a URL
-router.post('/encode', indexController.postEncode);
+router.post('/encode', indexController.encode);
 
 //Desencurtar a URL
-router.get('/decode', indexController.getDecode);
+router.get('/decode', indexController.decode);
 
 module.exports = router;
