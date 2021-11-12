@@ -1,32 +1,26 @@
 const Link = require('../models/link');
 const formatUrl = require('./../helpers/url')
+const md5Lib = require('md5');
+const ShortLink = require('./../models/short-link')
 
 require('dotenv').config();
 
 exports.postEncode = async(req, res, next) => {
     try {
-        const generateCode = () => {
-            let text = '';
-            const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            for (let i = 0; i < 5; i++) {
-                text += possible.charAt(Math.floor(Math.random() * possible.length))
-            }
-            return text;
-        }
-        const url = req.body.url;
+        const { url } = req.body;
+        if (url) {
+            const link = new ShortLink(Link)
+            const code = md5Lib(url)
 
-        if (url == "") {
-            return res.status(400).send({ error: "URL vazia" });
+            const result = await link.createShortLink(url, code)
+            res.status(201).send({
+                message: "Url encurtada com sucesso",
+                encodedUrl: `${formatUrl(req)}${result.dataValues.code}`
+            })
         }
-
-        const code = generateCode();
-        const resultado = await Link.create({
-            url,
-            code
-        })
-        res.status(201).send({
-            message: 'Link encurtado com sucesso',
-            url: `${formatUrl(req)}${resultado.dataValues.code}`
+        return res.status(400).send({
+            message: 'Algo deu errado, verifique se você informou o parâmetros corretos',
+            error: 400
         });
     } catch (error) {
         res.status(500).send({ error: error })
@@ -37,7 +31,6 @@ exports.getDecode = async(req, res, next) => {
     try {
         const url = req.body.url;
         const code = url.substring(22, 27);
-        console.log(code)
 
         const resultado = await Link.findOne({ where: { code } });
         if (!resultado) return res.sendStatus(404);
