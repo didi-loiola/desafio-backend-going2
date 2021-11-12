@@ -7,7 +7,7 @@ require('dotenv').config();
 
 exports.home = async(req, res, next) => {
     const { code } = req.params
-    if (code) {
+    if (code && code.length) {
         const link = new ShortLink(Link)
         const result = await link.findEncodeUrl(code)
 
@@ -26,7 +26,7 @@ exports.home = async(req, res, next) => {
 exports.encode = async(req, res, next) => {
     try {
         const { url } = req.body;
-        if (url) {
+        if (url && url.length) {
             const link = new ShortLink(Link)
             const code = md5(`${url}${Math.floor(Math.random() * 5536) - 3768}`)
 
@@ -48,7 +48,7 @@ exports.encode = async(req, res, next) => {
 exports.decode = async(req, res, next) => {
     try {
         const { encodedUrl } = req.body
-        if (encodedUrl) {
+        if (encodedUrl && encodedUrl.length) {
             const code = encodedUrl.slice(encodedUrl.lastIndexOf('/') + 1)
             const link = new ShortLink(Link)
             const result = await link.findEncodeUrl(code)
