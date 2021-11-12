@@ -91,3 +91,7 @@ Endpoints
             "message": "Algo deu errado, verifique se você informou o parâmetros corretos",
             "error": 400
         }
+    
+    GET /redirect/:code
+    
+    Esse endpoint vai redirecionar para a url original
