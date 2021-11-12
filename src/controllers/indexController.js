@@ -5,6 +5,24 @@ const ShortLink = require('./../models/short-link')
 
 require('dotenv').config();
 
+exports.home = async(req, res, next) => {
+    const { code } = req.params
+    if (code) {
+        const link = new ShortLink(Link)
+        const result = await link.findEncodeUrl(code)
+
+        if (!result) {
+            res.status(404).send({
+                message: "Esse código não consta na nossa base de dados, tente novamente"
+            });
+        }
+        res.redirect(result.dataValues.url)
+    }
+    return res.status(200).send({
+        message: "Api funcionando normalmente"
+    })
+}
+
 exports.encode = async(req, res, next) => {
     try {
         const { url } = req.body;

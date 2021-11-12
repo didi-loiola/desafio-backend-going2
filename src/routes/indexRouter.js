@@ -11,9 +11,10 @@ router.get('/', function(req, res, next) {
     res.status(200).send(init);
 })
 
+// Endpoint que redireciona quando o usuário coloca o código na url
+router.get('/redirect/:code', indexController.home);
 //Encurtar a URL
 router.post('/encode', indexController.encode);
-
 //Desencurtar a URL
 router.post('/decode', indexController.decode);
 
