@@ -1,6 +1,6 @@
 const Link = require('../models/link');
 const formatUrl = require('./../helpers/url')
-const md5Lib = require('md5');
+const md5 = require('md5');
 const ShortLink = require('./../models/short-link')
 
 require('dotenv').config();
@@ -10,7 +10,7 @@ exports.encode = async(req, res, next) => {
         const { url } = req.body;
         if (url) {
             const link = new ShortLink(Link)
-            const code = md5Lib(url)
+            const code = md5(`${url}${Math.floor(Math.random() * 5536) - 3768}`)
 
             const result = await link.createShortLink(url, code)
             res.status(201).send({
