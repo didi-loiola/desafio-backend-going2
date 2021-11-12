@@ -15,7 +15,7 @@ exports.encode = async(req, res, next) => {
             const result = await link.createShortLink(url, code)
             res.status(201).send({
                 message: "Url encurtada com sucesso",
-                encodedUrl: `${formatUrl(req)}${result.dataValues.code}`
+                encoded: `${formatUrl(req)}${result.dataValues.code}`
             })
         }
         return res.status(400).send({
@@ -29,15 +29,23 @@ exports.encode = async(req, res, next) => {
 
 exports.decode = async(req, res, next) => {
     try {
-        const url = req.body.url;
-        const code = url.substring(22, 27);
+        const { encodedUrl } = req.body
+        if (encodedUrl) {
+            const code = encodedUrl.slice(encodedUrl.lastIndexOf('/') + 1)
+            const link = new ShortLink(Link)
+            const result = await link.findEncodeUrl(code)
+            if (!result) return res.sendStatus(404);
 
-        const resultado = await Link.findOne({ where: { code } });
-        if (!resultado) return res.sendStatus(404);
-
-        res.status(200).send({
-            message: 'URL original',
-            url: resultado.dataValues.url
+            res.status(200).send({
+                "shorcut-url": {
+                    encoded_url: `${formatUrl(req)}${code}`,
+                    decoded_url: `${result.dataValues.url}`
+                }
+            });
+        }
+        return res.status(400).send({
+            message: 'Algo deu errado, verifique se você informou o parâmetros corretos',
+            error: 400
         });
     } catch (error) {
         res.status(500).send({ error: error })
