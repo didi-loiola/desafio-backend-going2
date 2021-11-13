@@ -107,7 +107,7 @@ Você vai precisar criar um arquivo .env, abaixo está o modelo de como o arquiv
     DB_PORT=string_qualquer
     DIALECT=string_qualquer 
 
-Essa variavél DIALECT ele deve possuir o seguintes valores.
+Essa variavél DIALECT ele deve possuir alguns desses valores
 
     - mysql
     - postgres
