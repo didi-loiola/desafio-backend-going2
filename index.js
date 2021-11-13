@@ -1,15 +1,15 @@
-var express = require('express');
+const express = require('express');
 
-var indexRouter = require('./src/routes/indexRouter');
+const indexRouter = require('./src/routes/indexRouter');
 
 const app = express();
 
 //Conexão com Banco de Dados
-(async() =>{
+(async() => {
     const database = require('./src/db');
     const Link = require('./src/models/link');
-  
-  await database.sync();
+
+    await database.sync();
 })()
 
 //Configurações da Aplicação
@@ -20,4 +20,4 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/', indexRouter);
 
 //Inicialização do Servidor
-app.listen(4000, ()=>console.log('Aplicação em execução na porta 4000'));
+app.listen(4000, () => console.log('Aplicação em execução na porta 4000'));
