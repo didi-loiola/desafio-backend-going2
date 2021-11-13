@@ -26,7 +26,7 @@ Digite os comandos abaixo para iniciar o projeto
 
 Para iniciar o servidor digite o comando abaixo.
 
-    npm run dev
+    npm start
 
 Agora no seu navegador digite o seguinte endereço.
 
@@ -53,7 +53,7 @@ Endpoints
     Dados que devem ser enviados
 
         {
-            url: url_qualquer
+            "url": "url_qualquer"
         }
     Resposta da requsição
         201
@@ -69,8 +69,7 @@ Endpoints
             }
 
     POST /encode
-
-    Vai retorna a url decodificada
+        - Vai retornar a url decodificada
 
     Dados que devem ser enviados
     
@@ -93,8 +92,7 @@ Endpoints
         }
     
     GET /redirect/:code
-    
-    Esse endpoint vai redirecionar para a url original
+        - Esse endpoint vai redirecionar para a url original
 
 ## Observaçãoes
 
